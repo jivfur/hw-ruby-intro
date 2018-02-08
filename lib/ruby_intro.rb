@@ -28,25 +28,57 @@ def sum_to_n? arr, n
 end
 
 # Part 2
+# Part 2
 
 def hello(name)
   return "Hello, "+name
 end
 
 def starts_with_consonant? s
-  /^[^aeiou]/i.match?(/^\w/.match(s).to_s) 
+  /^[^aeiou]/i.match(/^\w/.match(s).to_s) != nil
 end
 
 def binary_multiple_of_4? s
-  if !(/^(1|0)+$/.match?(s))
+  if (/^(1|0)+$/.match(s)==nil)
     return false
   end
   s.to_i(2)%4==0
 end
-
 # Part 3
 class BookInStock
-# YOUR CODE HERE
+  attr_accessor :isbn, :price
+  
+  def initialize(new_isbn,new_price)
+    self.isbn=new_isbn
+    self.price=new_price
+  end
+  
+  def isbn
+    @isbn
+  end
+  
+  def isbn=(arg)
+    #code unless condition
+    raise ArgumentError.new("It has to be a not empty string") unless arg.is_a?(String) && !arg.to_s.empty?
+    #!arg.is_a?(String)
+    @isbn = arg
+  end  
+  
+  def price
+    return @price
+  end
+  
+  def price=(arg)
+    raise ArgumentError.new("It has to be a floating number grater than zero") unless arg.is_a?(Numeric) && arg>0
+    @price = arg
+  end
+  
+  def price_as_string()
+    sprintf("$%.2f",@price)
+  end
 end
+
+#myBook = BookInStock.new('isbn1',-5.0)
+#puts myBook.price_as_string
 
 
